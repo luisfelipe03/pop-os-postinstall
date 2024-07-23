@@ -67,7 +67,6 @@ PROGRAMAS_PARA_INSTALAR=(
   snapd
   gparted
   vlc
-  code
   git
   wget
   gnome-tweaks
@@ -103,9 +102,14 @@ install_debs() {
 install_flatpaks() {
   echo -e "${VERDE}[INFO] - Instalando pacotes flatpak${SEM_COR}"
 
+  # Adicionar repositório Flathub
+  flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
   FLATPAK_PROGRAMS=(
     com.spotify.Client
-    org.freedesktop.Piper
+    com.anydesk.Anydesk
+    org.remmina.Remmina
+    org.gabmus.whatip
     org.gnome.Boxes
     org.onlyoffice.desktopeditors
     com.discordapp.Discord
@@ -125,11 +129,16 @@ install_flatpaks() {
 install_snaps() {
   echo -e "${VERDE}[INFO] - Instalando pacotes snap${SEM_COR}"
 
+  # Garantir que snapd está instalado
+  if ! dpkg -l | grep -q snapd; then
+    sudo apt install snapd -y
+  fi
+
   SNAP_PROGRAMS=(
-    authy
-    intellij-idea-ultimate --classic
-    sublime-text --classic
-    pgadmin4
+    "intellij-idea-ultimate --classic"
+    "sublime-text --classic"
+    "pgadmin4"
+    "code --classic"
   )
 
   for program in "${SNAP_PROGRAMS[@]}"; do
