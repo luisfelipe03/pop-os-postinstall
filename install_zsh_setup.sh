@@ -55,6 +55,16 @@ else
     echo "ASDF já está instalado."
 fi
 
+# Adicionando plugins do asdf
+echo "Adicionando plugins do asdf..."
+source "$HOME/.asdf/asdf.sh"
+
+asdf plugin-add java https://github.com/halcyon/asdf-java.git
+asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+asdf plugin-add python
+
+echo "Plugins do asdf adicionados com sucesso."
+
 # Baixando e instalando a fonte Fira Code
 FIRA_CODE_DIR="$HOME/.fonts"
 FIRA_CODE_ZIP="/tmp/FiraCode.zip"
@@ -131,6 +141,7 @@ echo "Ferramentas instaladas:"
 echo "  - Zsh (shell padrão)"
 echo "  - Oh My Zsh com tema Spaceship"
 echo "  - Plugins: zsh-autosuggestions, zsh-syntax-highlighting, asdf"
+echo "  - Plugins do asdf: Java, Node.js, Python"
 echo "  - Fonte Fira Code"
 echo "  - Gnome Tweaks e Gnome Extensions"
 echo -e "\nReinicie o terminal ou use 'exec \$SHELL' para aplicar as configurações."
