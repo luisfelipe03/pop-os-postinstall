@@ -11,7 +11,16 @@ if ! [ -x "$(command -v zsh)" ]; then
 else
     echo "Zsh já está instalado."
 fi
-chsh -s $(which zsh)
+
+# Configurando Zsh como shell padrão
+CURRENT_SHELL=$(getent passwd $USER | cut -d: -f7)
+if [ "$CURRENT_SHELL" != "$(which zsh)" ]; then
+    echo "Definindo Zsh como shell padrão..."
+    sudo chsh -s "$(which zsh)" $USER
+else
+    echo "Zsh já é o shell padrão."
+fi
+
 
 # Instalação do Oh My Zsh
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
